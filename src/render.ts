@@ -22,7 +22,33 @@ const mark = (cls: string) => `
 const seal = (cls: string) =>
 	`<span class="${cls}" aria-hidden="true"><span>覓</span><span>谷</span></span>`;
 
-function head(c: Content, lang: Lang, origin: string, title: string): string {
+// 首頁才輸出結構化資料。只放公開資訊，不含統編與地址。
+function organizationJsonLd(origin: string): string {
+	const data = {
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"@id": `${origin}/#organization`,
+		name: content.zh.companyName,
+		legalName: content.zh.companyName,
+		alternateName: [content.en.companyName, "覓谷資訊", "MeetGood"],
+		url: `${origin}/`,
+		logo: `${origin}/logo.png`,
+		email: EMAIL,
+	};
+	return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
+}
+
+function head(c: Content, lang: Lang, origin: string, title: string, indexable: boolean): string {
+	const other = content[lang === "zh" ? "en" : "zh"];
+	const seo = indexable
+		? `<link rel="canonical" href="${origin}${c.path}">
+<link rel="alternate" hreflang="zh-Hant-TW" href="${origin}/">
+<link rel="alternate" hreflang="en" href="${origin}/en">
+<link rel="alternate" hreflang="x-default" href="${origin}/">
+<meta property="og:url" content="${origin}${c.path}">
+${organizationJsonLd(origin)}`
+		: `<meta name="robots" content="noindex">`;
+
 	return `<!doctype html>
 <html lang="${c.htmlLang}" data-lang="${lang}">
 <head>
@@ -31,14 +57,18 @@ function head(c: Content, lang: Lang, origin: string, title: string): string {
 <title>${title}</title>
 <meta name="description" content="${c.description}">
 <meta name="theme-color" content="#ece6d9">
-<link rel="canonical" href="${origin}${c.path}">
-<link rel="alternate" hreflang="zh-Hant-TW" href="${origin}/">
-<link rel="alternate" hreflang="en" href="${origin}/en">
-<link rel="alternate" hreflang="x-default" href="${origin}/">
+${seo}
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="${c.companyName}">
 <meta property="og:title" content="${c.title}">
 <meta property="og:description" content="${c.description}">
-<meta property="og:url" content="${origin}${c.path}">
+<meta property="og:locale" content="${c.ogLocale}">
+<meta property="og:locale:alternate" content="${other.ogLocale}">
+<meta property="og:image" content="${origin}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${c.companyName}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +124,7 @@ export function renderHome(lang: Lang, origin: string): string {
 	const a = c.approach;
 	const n = c.name;
 
-	return `${head(c, lang, origin, c.title)}
+	return `${head(c, lang, origin, c.title, true)}
 <body id="top">
 ${header(c, lang)}
 <main>
@@ -193,7 +223,7 @@ ${footer(c)}
 
 export function renderNotFound(lang: Lang, origin: string): string {
 	const c = content[lang];
-	return `${head(c, lang, origin, `404 · ${c.title}`)}
+	return `${head(c, lang, origin, `404 · ${c.title}`, false)}
 <body id="top" class="is-404">
 ${header(c, lang)}
 <main class="lost">

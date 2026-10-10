@@ -4,6 +4,7 @@
 	"type": "module",
 	"scripts": {
 		"prerender": "node scripts/prerender.ts",
+		"og": "sh scripts/og/render.sh",
 		"dev": "npm run prerender && cf dev",
 		"build": "npm run prerender && cf build",
 		"deploy": "npm run prerender && cf deploy",

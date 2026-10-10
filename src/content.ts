@@ -17,6 +17,7 @@ export interface Step {
 export interface Content {
 	htmlLang: string;
 	path: string;
+	ogLocale: string;
 	title: string;
 	description: string;
 	companyName: string;
@@ -38,6 +39,7 @@ export const content: Record<Lang, Content> = {
 	zh: {
 		htmlLang: "zh-Hant-TW",
 		path: "/",
+		ogLocale: "zh_TW",
 		title: "覓谷資訊有限公司｜MeetGood Information",
 		description: "覓谷資訊提供軟體開發、資料處理與電子資訊服務。在資訊的山谷裡，替你找到路。",
 		companyName: "覓谷資訊有限公司",
@@ -112,6 +114,7 @@ export const content: Record<Lang, Content> = {
 	en: {
 		htmlLang: "en",
 		path: "/en",
+		ogLocale: "en_US",
 		title: "MeetGood Information Co., Ltd.",
 		description:
 			"MeetGood builds software, processes data and runs online information services. We find the path through the valley of information.",

@@ -23,9 +23,9 @@ const seal = (cls: string) =>
 	`<span class="${cls}" aria-hidden="true"><span>覓</span><span>谷</span></span>`;
 
 // 首頁才輸出結構化資料。只放公開資訊，不含統編與地址。
-function organizationJsonLd(origin: string): string {
-	const data = {
-		"@context": "https://schema.org",
+// WebSite 決定 Google 顯示的網站名稱，只能放在子網域根目錄 /。
+function jsonLd(origin: string, lang: Lang): string {
+	const organization = {
 		"@type": "Organization",
 		"@id": `${origin}/#organization`,
 		name: content.zh.companyName,
@@ -34,6 +34,17 @@ function organizationJsonLd(origin: string): string {
 		url: `${origin}/`,
 		logo: `${origin}/logo.png`,
 		email: EMAIL,
+	};
+	const website = {
+		"@type": "WebSite",
+		"@id": `${origin}/#website`,
+		name: content.zh.siteName,
+		alternateName: [content.en.siteName, content.zh.companyName],
+		url: `${origin}/`,
+	};
+	const data = {
+		"@context": "https://schema.org",
+		"@graph": lang === "zh" ? [website, organization] : [organization],
 	};
 	return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
 }
@@ -46,7 +57,7 @@ function head(c: Content, lang: Lang, origin: string, title: string, indexable: 
 <link rel="alternate" hreflang="en" href="${origin}/en">
 <link rel="alternate" hreflang="x-default" href="${origin}/">
 <meta property="og:url" content="${origin}${c.path}">
-${organizationJsonLd(origin)}`
+${jsonLd(origin, lang)}`
 		: `<meta name="robots" content="noindex">`;
 
 	return `<!doctype html>
@@ -59,7 +70,7 @@ ${organizationJsonLd(origin)}`
 <meta name="theme-color" content="#ece6d9">
 ${seo}
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="${c.companyName}">
+<meta property="og:site_name" content="${c.siteName}">
 <meta property="og:title" content="${c.title}">
 <meta property="og:description" content="${c.description}">
 <meta property="og:locale" content="${c.ogLocale}">

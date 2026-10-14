@@ -20,6 +20,7 @@ export interface Content {
 	ogLocale: string;
 	title: string;
 	description: string;
+	siteName: string;
 	companyName: string;
 	nav: { services: string; approach: string; name: string; contact: string };
 	switchLabel: string;
@@ -42,6 +43,7 @@ export const content: Record<Lang, Content> = {
 		ogLocale: "zh_TW",
 		title: "覓谷資訊有限公司｜MeetGood Information",
 		description: "覓谷資訊提供軟體開發、資料處理與電子資訊服務。在資訊的山谷裡，替你找到路。",
+		siteName: "覓谷資訊",
 		companyName: "覓谷資訊有限公司",
 		nav: { services: "服務", approach: "方法", name: "名字", contact: "聯絡" },
 		switchLabel: "切換語言",
@@ -118,6 +120,7 @@ export const content: Record<Lang, Content> = {
 		title: "MeetGood Information Co., Ltd.",
 		description:
 			"MeetGood builds software, processes data and runs online information services. We find the path through the valley of information.",
+		siteName: "MeetGood",
 		companyName: "MeetGood Information Co., Ltd.",
 		nav: { services: "Services", approach: "Approach", name: "The name", contact: "Contact" },
 		switchLabel: "Switch language",

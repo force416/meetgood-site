@@ -20,7 +20,7 @@ const mark = (cls: string) => `
 </svg>`;
 
 const seal = (cls: string) =>
-	`<span class="${cls}" aria-hidden="true"><span>覓</span><span>谷</span></span>`;
+	`<span class="${cls}" aria-hidden="true" data-nosnippet><span>覓</span><span>谷</span></span>`;
 
 // 首頁才輸出結構化資料。只放公開資訊，不含統編與地址。
 // WebSite 決定 Google 顯示的網站名稱，只能放在子網域根目錄 /。
@@ -39,7 +39,7 @@ function jsonLd(origin: string, lang: Lang): string {
 		"@type": "WebSite",
 		"@id": `${origin}/#website`,
 		name: content.zh.siteName,
-		alternateName: [content.en.siteName, content.zh.companyName],
+		alternateName: [content.en.siteName, content.zh.companyName, new URL(origin).host],
 		url: `${origin}/`,
 	};
 	const data = {
@@ -145,7 +145,7 @@ ${header(c, lang)}
 			<p class="kicker">${c.hero.kicker}</p>
 			<h1 class="hero__title">${c.hero.headline}</h1>
 			<p class="hero__lede">${c.hero.lede}</p>
-			<a class="cta" href="#contact"><span>${c.hero.cta}</span><span class="cta__arrow" aria-hidden="true">→</span></a>
+			<a class="cta" href="#contact"><span>${c.hero.cta}</span><span class="cta__arrow" aria-hidden="true" data-nosnippet>→</span></a>
 		</div>
 		<aside class="legend" aria-hidden="true">
 			<p class="legend__title">${c.legend.title}</p>
@@ -222,7 +222,7 @@ ${header(c, lang)}
 		<span class="section__index">${c.contact.index}</span>
 		<h2 class="contact__title">${c.contact.heading}</h2>
 		<p class="contact__body">${c.contact.body}</p>
-		<a class="contact__mail" href="mailto:${EMAIL}">${EMAIL}<span aria-hidden="true">↗</span></a>
+		<a class="contact__mail" href="mailto:${EMAIL}">${EMAIL}<span aria-hidden="true" data-nosnippet>↗</span></a>
 		${seal("seal seal--lg")}
 	</section>
 </main>
@@ -242,7 +242,7 @@ ${header(c, lang)}
 	<p class="kicker">404</p>
 	<h1 class="hero__title">${c.notFound.title}</h1>
 	<p class="hero__lede">${c.notFound.body}</p>
-	<a class="cta" href="${c.path}"><span>${c.notFound.back}</span><span class="cta__arrow" aria-hidden="true">→</span></a>
+	<a class="cta" href="${c.path}"><span>${c.notFound.back}</span><span class="cta__arrow" aria-hidden="true" data-nosnippet>→</span></a>
 </main>
 ${footer(c)}
 <script src="/site.js" defer></script>

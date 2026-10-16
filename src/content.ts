@@ -41,7 +41,7 @@ export const content: Record<Lang, Content> = {
 		htmlLang: "zh-Hant-TW",
 		path: "/",
 		ogLocale: "zh_TW",
-		title: "覓谷資訊有限公司｜MeetGood Information",
+		title: "覓谷資訊｜MeetGood 軟體開發與資料服務",
 		description: "覓谷資訊提供軟體開發、資料處理與電子資訊服務。在資訊的山谷裡，替你找到路。",
 		siteName: "覓谷資訊",
 		companyName: "覓谷資訊有限公司",

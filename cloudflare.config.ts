@@ -4,7 +4,7 @@ export default defineConfig({
 	worker: {
 		name: "meetgood-site",
 		compatibilityDate: "2026-10-06",
-		domains: ["meetgood.ericshih.net"],
+		domains: ["meetgood.ericshih.dev", "meetgood.ericshih.net"],
 		assets: {
 			notFoundHandling: "404-page",
 		},

@@ -2,7 +2,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { renderHome, renderNotFound } from "../src/render.ts";
 
-const SITE = "https://meetgood.ericshih.net";
+const SITE = "https://meetgood.ericshih.dev";
 const out = new URL("../public/", import.meta.url);
 
 // 依 Google 規範：每個 <url> 都列出所有語言版本，包含自己。

@@ -34,7 +34,7 @@ export interface Content {
 	notFound: { title: string; body: string; back: string };
 }
 
-export const EMAIL = "support@ericshih.net";
+export const EMAIL = "support@ericshih.dev";
 
 export const content: Record<Lang, Content> = {
 	zh: {

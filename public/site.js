@@ -1,4 +1,4 @@
-// 覓谷資訊 — 等高線畫布（marching squares）與捲動顯示。
+// 覓谷資訊 — 等高線畫布（marching squares）。
 (() => {
 	const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -216,18 +216,4 @@
 	}
 
 	document.querySelectorAll("canvas[data-topo]").forEach(setup);
-
-	// ── scroll reveal ──
-	const io = new IntersectionObserver(
-		(entries) => {
-			for (const e of entries) {
-				if (e.isIntersecting) {
-					e.target.classList.add("is-in");
-					io.unobserve(e.target);
-				}
-			}
-		},
-		{ rootMargin: "0px 0px -10% 0px" },
-	);
-	document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 })();

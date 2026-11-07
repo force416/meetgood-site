@@ -85,7 +85,6 @@ ${seo}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ${FONTS[lang].map((href) => `<link rel="stylesheet" href="${href}">`).join("\n")}
 <link rel="stylesheet" href="/styles.css">
-<script>document.documentElement.classList.add("js")</script>
 </head>`;
 }
 
@@ -157,7 +156,6 @@ ${header(c, lang)}
 			<div class="scale"><span></span><span></span><span></span><span></span></div>
 			<p class="scale__label">0 · · · 1 km</p>
 		</aside>
-		<div class="north" aria-hidden="true"><span>N</span><svg viewBox="0 0 12 28"><path d="M6 0 12 28 6 22 0 28Z" fill="currentColor"/></svg></div>
 	</section>
 
 	<section class="section services" id="services">
@@ -169,16 +167,18 @@ ${header(c, lang)}
 		<ol class="stations">
 			${s.items
 				.map(
-					(it) => `
-			<li class="station reveal">
+					(it, i) => `
+			<li class="station">
 				<div class="station__meta">
 					<svg class="station__icon" viewBox="0 0 20 18" aria-hidden="true"><path d="M10 1 19 17H1Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="10" cy="11.5" r="1.6" fill="currentColor"/></svg>
-					<span>${it.station}</span>
+					<span class="station__letter" aria-hidden="true">${"ABC"[i]}</span>
 					<span class="station__code">${it.code}</span>
 				</div>
-				<h3 class="station__title">${it.title}</h3>
-				<p class="station__body">${it.body}</p>
-				<ul class="tags">${it.tags.map((t) => `<li>${t}</li>`).join("")}</ul>
+				<div class="station__main">
+					<h3 class="station__title">${it.title}</h3>
+					<p class="station__body">${it.body}</p>
+				</div>
+				<ul class="station__items">${it.items.map((t) => `<li>${t}</li>`).join("")}</ul>
 			</li>`,
 				)
 				.join("")}
@@ -195,10 +195,11 @@ ${header(c, lang)}
 			${a.steps
 				.map(
 					(st, i) => `
-			<li class="waypoint reveal" style="--i:${i}">
+			<li class="waypoint">
 				<span class="waypoint__no">${String(i + 1).padStart(2, "0")}</span>
 				<span class="waypoint__dot" aria-hidden="true"></span>
 				<h3 class="waypoint__title">${st.title}</h3>
+				<p class="waypoint__label">${st.label}</p>
 				<p class="waypoint__body">${st.body}</p>
 			</li>`,
 				)

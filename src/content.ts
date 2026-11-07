@@ -3,14 +3,14 @@ export type Lang = "zh" | "en";
 
 export interface Service {
 	code: string;
-	station: string;
 	title: string;
 	body: string;
-	tags: string[];
+	items: string[];
 }
 
 export interface Step {
 	title: string;
+	label: string;
 	body: string;
 }
 
@@ -50,47 +50,44 @@ export const content: Record<Lang, Content> = {
 		hero: {
 			kicker: "軟體・資料・資訊服務",
 			headline: "在資訊的山谷裡，<br>找到路。",
-			lede: "覓谷資訊替團隊勘查問題的地形，畫出可行的路線，再把路鋪好。從一支程式到一整套系統，我們都用同一種踏實的方式走完。",
+			lede: "覓谷資訊開發網站與後端系統、整理資料、維運線上服務。從一支程式到一整套系統，我們都先看清楚地形、畫好路線，再把路鋪好。",
 			cta: "寫信給我們",
 		},
 		legend: { title: "圖例 · LEGEND", contour: "等高線", trail: "路線", destination: "目的地" },
 		services: {
 			index: "01",
-			heading: "三個測站",
-			intro: "我們的工作圍繞三個領域。每一項都對應公司登記的營業項目。",
+			heading: "服務項目",
+			intro: "我們的工作分成三個領域。每一項都對應公司登記的營業項目。",
 			items: [
 				{
 					code: "I301010",
-					station: "測站 A",
 					title: "資訊軟體服務",
 					body: "網站、後端服務與內部系統的設計和開發。先弄清楚要解決的問題，再決定要寫多少程式。",
-					tags: ["Web", "API", "系統整合"],
+					items: ["網站與後台管理", "API 設計與第三方串接", "內部作業系統"],
 				},
 				{
 					code: "I301020",
-					station: "測站 B",
 					title: "資料處理服務",
 					body: "把散落的資料整理成可以信任的資料。包含資料清理、轉換流程與報表自動化。",
-					tags: ["ETL", "資料管線", "報表"],
+					items: ["資料清理與格式轉換", "排程資料管線（ETL）", "自動化報表"],
 				},
 				{
 					code: "I301030",
-					station: "測站 C",
 					title: "電子資訊供應服務",
 					body: "建立與維運線上資訊服務，讓資訊穩定、即時地送到需要的人手上。",
-					tags: ["雲端部署", "邊緣運算", "維運"],
+					items: ["雲端與邊緣部署", "監控與告警", "長期維運與改版"],
 				},
 			],
 		},
 		approach: {
 			index: "02",
-			heading: "我們怎麼走",
+			heading: "合作流程",
 			intro: "每個專案都走同一條路線。路線清楚，進度就清楚。",
 			steps: [
-				{ title: "勘查", body: "聽你描述目的地，看清楚現況、限制與真正的問題。" },
-				{ title: "測繪", body: "把需求畫成地圖：範圍、優先順序、技術選擇與時程。" },
-				{ title: "開路", body: "小步前進，頻繁交付。每一段路都可以走、可以驗收。" },
-				{ title: "巡山", body: "上線不是終點。我們持續監看、修補與改善。" },
+				{ title: "勘查", label: "需求訪談", body: "聽你描述目的地，看清楚現況、限制與真正的問題。" },
+				{ title: "測繪", label: "規劃與估時", body: "把需求畫成地圖：範圍、優先順序、技術選擇與時程。" },
+				{ title: "開路", label: "開發與交付", body: "小步前進，頻繁交付。每一段路都可以走、可以驗收。" },
+				{ title: "巡山", label: "上線維運", body: "上線不是終點。我們持續監看、修補與改善。" },
 			],
 		},
 		name: {
@@ -127,47 +124,44 @@ export const content: Record<Lang, Content> = {
 		hero: {
 			kicker: "Software · Data · Information services",
 			headline: "Finding the path<br>through the valley.",
-			lede: "MeetGood surveys the terrain of your problem, maps a route that works, and then builds the road. From a single script to a full system, we walk it the same steady way.",
+			lede: "MeetGood builds websites and backend systems, processes data and runs online services. From a single script to a full system, we survey the terrain and map the route before we build the road.",
 			cta: "Write to us",
 		},
 		legend: { title: "LEGEND", contour: "Contour", trail: "Route", destination: "Destination" },
 		services: {
 			index: "01",
-			heading: "Three stations",
+			heading: "What we do",
 			intro: "Our work covers three fields. Each one matches a registered line of business.",
 			items: [
 				{
 					code: "I301010",
-					station: "Station A",
 					title: "Software services",
 					body: "Design and development of websites, backend services and internal systems. We define the problem first, then decide how much code it needs.",
-					tags: ["Web", "API", "Integration"],
+					items: ["Websites and admin panels", "API design and integrations", "Internal business systems"],
 				},
 				{
 					code: "I301020",
-					station: "Station B",
 					title: "Data processing",
 					body: "We turn scattered data into data you can trust: cleaning, transformation pipelines and automated reports.",
-					tags: ["ETL", "Pipelines", "Reporting"],
+					items: ["Data cleaning and conversion", "Scheduled pipelines (ETL)", "Automated reports"],
 				},
 				{
 					code: "I301030",
-					station: "Station C",
 					title: "Online information services",
 					body: "We build and run online services that deliver information reliably and on time to the people who need it.",
-					tags: ["Cloud", "Edge", "Operations"],
+					items: ["Cloud and edge deployment", "Monitoring and alerts", "Long-term maintenance"],
 				},
 			],
 		},
 		approach: {
 			index: "02",
-			heading: "How we walk",
+			heading: "How we work",
 			intro: "Every project follows the same route. A clear route means clear progress.",
 			steps: [
-				{ title: "Survey", body: "We listen to where you want to go and study the terrain, the limits and the real problem." },
-				{ title: "Map", body: "We turn requirements into a map: scope, priorities, technical choices and timeline." },
-				{ title: "Build", body: "Small steps, frequent delivery. Every stretch of road is usable and reviewable." },
-				{ title: "Patrol", body: "Launch is not the end. We monitor, repair and improve." },
+				{ title: "Survey", label: "Discovery", body: "We listen to where you want to go and study the terrain, the limits and the real problem." },
+				{ title: "Map", label: "Planning and estimates", body: "We turn requirements into a map: scope, priorities, technical choices and timeline." },
+				{ title: "Build", label: "Development and delivery", body: "Small steps, frequent delivery. Every stretch of road is usable and reviewable." },
+				{ title: "Patrol", label: "Operations", body: "Launch is not the end. We monitor, repair and improve." },
 			],
 		},
 		name: {

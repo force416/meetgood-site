@@ -188,7 +188,7 @@ p {
 
 .section {
 	position: relative;
-	padding: clamp(88px, 12vw, 168px) var(--gutter);
+	padding: clamp(72px, 9vw, 128px) var(--gutter);
 	max-width: var(--max);
 	margin: 0 auto;
 }
@@ -357,50 +357,41 @@ html[data-lang="en"] .hero__title {
 	color: var(--ink-2);
 }
 
-.north {
-	position: absolute;
-	top: 36px;
-	right: var(--gutter);
-	display: grid;
-	justify-items: center;
-	gap: 4px;
-	font-family: var(--font-mono);
-	font-size: 12px;
-}
-
-.north svg {
-	width: 12px;
-	height: 28px;
-}
-
 /* ───────── services ───────── */
 
+/* 每一列沿用 .section__head 的三欄，讓代號、說明、項目和標題列對齊。 */
 .stations {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .station {
-	padding: 8px 32px 24px;
-	border-left: 1px solid var(--line);
+	display: grid;
+	grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr);
+	gap: 24px;
+	padding: 40px 0;
+	border-bottom: 1px solid var(--line);
 }
 
 .station:first-child {
-	padding-left: 0;
-	border-left: 0;
+	padding-top: 0;
+}
+
+.station:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
 }
 
 .station__meta {
-	display: flex;
-	align-items: center;
-	gap: 10px;
+	display: grid;
+	align-content: start;
+	justify-items: start;
+	gap: 6px;
 	font-family: var(--font-mono);
 	font-size: 12px;
 	letter-spacing: 0.12em;
-	color: var(--moss);
+	color: var(--ink-2);
 }
 
 .station__icon {
@@ -409,40 +400,59 @@ html[data-lang="en"] .hero__title {
 	color: var(--seal);
 }
 
-.station__code {
-	margin-left: auto;
-	color: var(--ink-2);
-	opacity: 0.7;
+.station__letter {
+	font-family: var(--font-display);
+	font-weight: 500;
+	font-size: 44px;
+	line-height: 1;
+	letter-spacing: 0;
+	color: var(--ink);
 }
 
 .station__title {
-	margin: 36px 0 16px;
+	margin-bottom: 14px;
 	font-family: var(--font-display);
 	font-weight: 500;
-	font-size: clamp(24px, 2.2vw, 32px);
-	line-height: 1.3;
+	font-size: clamp(26px, 2.4vw, 36px);
+	line-height: 1.25;
+}
+
+html[data-lang="zh"] .station__title {
+	letter-spacing: 0.04em;
 }
 
 .station__body {
 	color: var(--ink-2);
+	max-width: 30em;
 }
 
-.tags {
+.station__items {
 	list-style: none;
-	margin: 28px 0 0;
+	margin: 0;
 	padding: 0;
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
+	justify-self: end;
+	width: min(100%, 34em);
+	border-top: 1px solid var(--ink);
 }
 
-.tags li {
-	font-family: var(--font-mono);
-	font-size: 11px;
-	letter-spacing: 0.08em;
-	padding: 3px 10px;
-	border: 1px solid var(--line);
-	border-radius: 999px;
+.station__items li {
+	display: flex;
+	align-items: baseline;
+	gap: 14px;
+	padding: 12px 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.station__items li:last-child {
+	border-bottom: 0;
+}
+
+.station__items li::before {
+	content: "";
+	flex: none;
+	width: 14px;
+	border-top: 1.5px dashed var(--seal);
+	transform: translateY(-4px);
 }
 
 /* ───────── approach ───────── */
@@ -469,7 +479,6 @@ html[data-lang="en"] .hero__title {
 
 .waypoint {
 	position: relative;
-	transition-delay: calc(var(--i) * 120ms) !important;
 }
 
 .waypoint__no {
@@ -498,11 +507,19 @@ html[data-lang="en"] .hero__title {
 }
 
 .waypoint__title {
-	margin: 28px 0 10px;
+	margin: 28px 0 4px;
 	font-family: var(--font-display);
 	font-weight: 500;
 	font-size: clamp(26px, 2.4vw, 36px);
 	letter-spacing: 0.04em;
+}
+
+.waypoint__label {
+	margin-bottom: 12px;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	letter-spacing: 0.12em;
+	color: var(--moss);
 }
 
 .waypoint__body {
@@ -656,7 +673,7 @@ html[data-lang="en"] .contact__title {
 .seal--lg {
 	position: absolute;
 	right: var(--gutter);
-	bottom: clamp(88px, 12vw, 168px);
+	bottom: clamp(72px, 9vw, 128px);
 	width: 72px;
 	height: 128px;
 	padding: 12px 0;
@@ -715,27 +732,9 @@ html[data-lang="en"] .contact__title {
 	position: relative;
 }
 
-/* ───────── reveal ───────── */
-
-.js .reveal {
-	opacity: 0;
-	transform: translateY(24px);
-	transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.js .reveal.is-in {
-	opacity: 1;
-	transform: none;
-}
-
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
-	}
-	.js .reveal {
-		opacity: 1;
-		transform: none;
-		transition: none;
 	}
 }
 
@@ -765,20 +764,25 @@ html[data-lang="en"] .contact__title {
 		justify-self: start;
 	}
 
-	.stations {
+	.station {
 		grid-template-columns: 1fr;
-	}
-
-	.station,
-	.station:first-child {
+		gap: 16px;
 		padding: 32px 0;
-		border-left: 0;
-		border-top: 1px solid var(--line);
 	}
 
-	.station:first-child {
-		border-top: 0;
-		padding-top: 0;
+	.station__meta {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.station__letter {
+		font-size: 32px;
+	}
+
+	.station__items {
+		justify-self: start;
+		margin-top: 8px;
 	}
 
 	.trail {
@@ -810,11 +814,9 @@ html[data-lang="en"] .contact__title {
 		grid-template-columns: 1fr;
 	}
 
+	/* 小螢幕沒有空間放圖例，放在文字下方只會把服務區往下推。 */
 	.legend {
-		position: relative;
-		right: auto;
-		bottom: auto;
-		margin-top: 56px;
+		display: none;
 	}
 
 	.hero {
